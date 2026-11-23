@@ -1,0 +1,33 @@
+name: Daily News Digest
+
+on:
+  schedule:
+    # Se ejecuta a las 8:30 (Europa/Madrid) todos los días.
+    # GitHub usa la zona horaria IANA 'Europe/Madrid' para ajustar la hora local.
+    - cron: '30 8 * * *'
+      timezone: "Europe/Madrid"
+  workflow_dispatch: # Permite ejecutarlo manualmente para probar
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser requests
+
+      - name: Ejecutar el script de noticias
+        env:
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+          RECEIVER_EMAIL: ${{ secrets.RECEIVER_EMAIL }}
+        run: python daily_news.py
