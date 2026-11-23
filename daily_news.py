@@ -5,6 +5,7 @@ from email.header import Header
 import feedparser
 import re
 import math
+import os
 from collections import Counter
 
 print("🔖 Versión del script: v8 (fuentes únicas + más fuentes españolas)")
