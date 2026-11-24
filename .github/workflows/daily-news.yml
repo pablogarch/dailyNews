@@ -4,7 +4,7 @@ on:
   schedule:
     # GitHub solo admite UTC en cron. 07:30 UTC = 08:30 en España (invierno, CET).
     # OJO: en verano (CEST, UTC+2) se ejecutará a las 09:30 hora local.
-    - cron: '11 10 * * *'
+    - cron: '11 7 * * *'
   workflow_dispatch:   # Habilita el botón "Run workflow" para pruebas manuales
 
 jobs:
